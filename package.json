@@ -1,6 +1,6 @@
 {
   "name": "simple-lodash-template-loader",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "simple-lodash-template-loader",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -24,7 +24,14 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "keywords": [],
+  "keywords": [
+    "lodash",
+    "template",
+    "lodash-template-loader",
+    "webpack",
+    "webpack-loader",
+    "simple"
+  ],
   "author": "SonOfMagic <qq1324318532@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -40,6 +47,7 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^27.0.2",
     "@types/loader-utils": "^2.0.3",
+    "@types/memory-fs": "^0.3.3",
     "@types/node": "^17.0.5",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
@@ -51,6 +59,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
     "jest": "^27.4.5",
+    "memory-fs": "^0.5.0",
     "rollup": "^2.62.0",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
@@ -59,6 +68,7 @@
     "webpack": "^5.65.0"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.178",
     "@types/lodash.template": "^4.5.0",
     "lodash.template": "^4.5.0"
   }
