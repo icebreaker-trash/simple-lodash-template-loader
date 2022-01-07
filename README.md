@@ -47,7 +47,14 @@ module.exports = {
 |       **`sourceURL`**       | `{string}`  |                           `'lodash.templateSources[n]'`                            | The sourceURL of the compiled template.                                                                                                      |
 |       **`variable`**        | `{string}`  |                                      `'obj'`                                       | The data object variable name.                                                                                                               |
 |       **`callback`**        | `{Fuction}` | `(this: webpack.LoaderContext<LoaderOptions>,contents: string) => TemplateOptions` | callback function allow you customize your templateSettings for each lodash templete file, the return options will be merged to root options |
-| **[`esModule`](#esmodule)** | `{Boolean}` |                                       `true`                                       | Uses ES modules syntax                                                                                                                       |
+| **[`esModule`](#esmodule)** | `{Boolean}` |                                      `false`                                       | Uses ES modules syntax                                                                                                                       |
+
+## Tips
+
+To support the 'esModule' option, the 'variable' option must be passed to avoid 'with' statements
+in the compiled template to be strict mode compatible.   
+Please see https://github.com/lodash/lodash/issues/3709#issuecomment-375898111.  
+To enable CommonJS, please set the 'esModule' option to false (default false).
 
 ## License
 

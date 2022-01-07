@@ -14,7 +14,7 @@ interface LoaderOptions extends TemplateOptions {
 function getLegacyLoaderConfig (
   loaderContext: webpack.LoaderContext<LoaderOptions>,
   defaultConfigKey: string
-) {
+): LoaderOptions {
   const options = loaderUtils.getOptions(loaderContext)
   const configKey = options ? options.config : defaultConfigKey
   if (configKey) {
@@ -29,7 +29,7 @@ export default function simpleLodashTemplateLoader (
   contents: string
 ) {
   this.cacheable && this.cacheable()
-  let config =
+  let config: LoaderOptions =
     this.version === 2
       ? loaderUtils.getOptions(this)
       : getLegacyLoaderConfig(this, 'simpleLodashTemplateLoader')
@@ -47,9 +47,19 @@ export default function simpleLodashTemplateLoader (
     sourceURL: config.sourceURL,
     variable: config.variable
   }
+  // default `commonjs` for building error about using 'with' stament
   const esModule =
-    typeof config.esModule !== 'undefined' ? config.esModule : true
+    typeof config.esModule !== 'undefined' ? config.esModule : false
+
+  if (esModule && !config.variable) {
+    throw new Error(`
+        To support the 'esModule' option, the 'variable' option must be passed to avoid 'with' statements
+        in the compiled template to be strict mode compatible. Please see https://github.com/lodash/lodash/issues/3709#issuecomment-375898111.
+        To enable CommonJS, please set the 'esModule' option to false.
+      `)
+  }
   const opt = Object.assign({}, defaults, config.callback?.call(this, contents))
+
   return `${esModule ? 'export default' : 'module.exports ='} ${
     template(contents, opt).source
   };`
