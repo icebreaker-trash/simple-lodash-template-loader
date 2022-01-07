@@ -64,7 +64,8 @@ describe('[Default]', () => {
           {
             loader: path.resolve(__dirname, '..'),
             options: {
-              esModule: false
+              esModule: false,
+              a: 'test'
             }
           }
         ]

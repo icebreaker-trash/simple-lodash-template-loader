@@ -1,6 +1,6 @@
 {
   "name": "simple-lodash-template-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A loader for webpack that allows importing files as a [`lodash template`](https://lodash.com/docs/4.17.15#template).",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -11,7 +11,8 @@
     "build:tsc": "cross-env NODE_ENV=development tsc --build tsconfig.json",
     "test": "jest",
     "init:rename": "node scripts/init/rename.js",
-    "clean": "node scripts/clean.js"
+    "clean": "node scripts/clean.js",
+    "prepublish": "yarn clean && yarn build"
   },
   "repository": {
     "type": "git",
@@ -70,7 +71,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.178",
     "@types/lodash.template": "^4.5.0",
-    "loader-utils": "^3.2.0",
+    "loader-utils": "^2.0.2",
     "lodash.template": "^4.5.0"
   }
 }
