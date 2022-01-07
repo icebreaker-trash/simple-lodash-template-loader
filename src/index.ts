@@ -1,7 +1,7 @@
 import type { TemplateOptions } from 'lodash'
 import template from 'lodash.template'
 import type * as webpack from 'webpack'
-
+import { getOptions } from 'loader-utils'
 interface LoaderOptions extends TemplateOptions {
   esModule?: boolean
   callback?: (
@@ -15,7 +15,7 @@ export default function simpleLodashTemplateLoader (
   contents: string
 ) {
   this.cacheable && this.cacheable()
-  const options = this.getOptions()
+  const options = this.getOptions ? this.getOptions() : getOptions(this) as LoaderOptions
 
   const defaults: TemplateOptions = {
     escape: options.escape,
