@@ -1,12 +1,16 @@
 # simple-lodash-template-loader
 
-A loader for webpack that allows importing files as a [`lodash template`](https://lodash.com/docs/4.17.15#template).
+Support Webpack both `4` and `5` , A loader for webpack that allows importing files as a [`lodash template`](https://lodash.com/docs/4.17.15#template).
+
+## Features
+
+- Support `Webpack` 4 and 5.
 
 ## Getting Started
 
 To begin, you'll need to install `simple-lodash-template-loader`:
 
-```console
+```bash
 npm install simple-lodash-template-loader --save-dev
 # or
 yarn add -D simple-lodash-template-loader
