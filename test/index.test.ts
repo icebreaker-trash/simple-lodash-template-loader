@@ -2,8 +2,31 @@
 import * as path from 'path'
 import { webpack, ModuleOptions } from 'webpack'
 import MemoryFs from 'memory-fs'
+import { Module } from 'module'
 
-function compile (rules: ModuleOptions['rules']) {
+const parentModule = module
+
+function execute (code: string) {
+  const resource = 'test.js'
+  const module = new Module(resource, parentModule)
+  // eslint-disable-next-line no-underscore-dangle
+  // @ts-ignore
+  module.paths = Module._nodeModulePaths(path.resolve(__dirname, './fixtures'))
+  module.filename = resource
+
+  // eslint-disable-next-line no-underscore-dangle
+  // @ts-ignore
+  module._compile(
+    code, // `let __export__;${code};module.exports = __export__;`,
+    resource
+  )
+
+  return module.exports
+}
+
+function compile (
+  rules: ModuleOptions['rules']
+): Promise<string | Buffer | undefined> {
   const compiler = webpack({
     mode: 'development',
     context: __dirname,
@@ -40,12 +63,15 @@ describe('[Default]', () => {
         use: [
           {
             loader: path.resolve(__dirname, '..'),
-            options: {}
+            options: {
+              esModule: false
+            }
           }
         ]
       }
     ])
+    const result = execute(source as string)({ user: 'fred' })
 
-    expect(source).toBeUndefined()
+    expect(result).toBe('hello fred!')
   })
 })

@@ -1,7 +1,7 @@
 {
   "name": "simple-lodash-template-loader",
-  "version": "0.0.1",
-  "description": "simple-lodash-template-loader",
+  "version": "1.0.0",
+  "description": "A loader for webpack that allows importing files as a [`lodash template`](https://lodash.com/docs/4.17.15#template).",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
